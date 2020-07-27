@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Ecomm</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+<h1>Welcome to Index Page Mr. {{name}}</h1>
+<center>
+<table border="2" width="600">
+    <tr>
+        <td>Product Id</td>
+        <td>Product Name</td>
+        <td>Price</td>
+        <td>Image</td>
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td><img src="{% static 'img/' %}{{product.image}}"></td>
+    </tr>
+    {% endfor %}
+</table>
+</center>
+</body>
+</html>
