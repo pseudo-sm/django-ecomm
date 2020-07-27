@@ -1,7 +1,7 @@
 # django-ecomm
 Ecommerce Project for Appstone students
 
-<b>Task for Day 1 - 28th July,2020<b><br>
+<b>Task for Day 1 - 28th July,2020<b><br> </b>
 <ul>
 <li> Setup a django project and create an app </li>
 <li> Do all the configurations like - settings.py, urls etc </li>
