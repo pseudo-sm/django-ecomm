@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
-
+from .models import Product
 products = [
     {
         "id" : 1,
@@ -27,3 +27,6 @@ def index(request):
     name = "John"
     return render(request,"index.html",{"products":products,"name":name})
 
+def products(request):
+    products = Product.objects.all()
+    return render(request,"products.html",{"products":products})
