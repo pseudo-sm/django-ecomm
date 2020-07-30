@@ -1,8 +1,9 @@
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/products.css' %}">
 </head>
@@ -36,9 +37,52 @@
                             </div>
                         </div><img src="{{product.image.url}}" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                     </div> <!-- End -->
+                    <div class="row" data-product="{{product.id}}">
+                        <button class="btn btn-primary minus-cart mr-2 cart-btn" style="display:none">-</button>
+                        <button class="btn btn-primary add-to-cart cart-btn">Add to Cart</button>
+                        <span class="cart-count" style="display:none;">1</span>
+                        <button class="btn btn-primary plus-cart cart-btn" style="display:none">+</button>
+                   </div>
                 </li> <!-- End -->
                 {% endfor %}
             </ul> <!-- End -->
         </div>
     </div>
 </div>
+<script>
+    $(".add-to-cart").click(function(){
+        $(this).parent().find(".plus-cart").css('display','block');
+        $(this).parent().find(".minus-cart").css('display','block');
+        $(this).parent().find(".cart-count").css('display','block');
+        $(this).css('display','none');
+    })
+    $(".plus-cart").click(function(){
+        count = $(this).parent().find(".cart-count").html();
+        count = parseInt(count);
+        count = count + 1;
+        $(this).parent().find(".cart-count").html(count);
+        console.log(count);
+    });
+</script>
+
+<script>
+    $(".cart-btn").click(function(){
+        id = $(this).parent().attr("data-product");
+        count = $(this).parent().find(".cart-count").html();
+        $.ajax({
+        url: "{% url 'add_cart'  %}",
+        data : {
+            'product':id,
+            'count':count,
+        },
+        type: 'GET',
+        dataType: 'json',
+        success: function(res) {
+                console.log(res);
+            }
+    });
+    })
+
+</script>
+
+

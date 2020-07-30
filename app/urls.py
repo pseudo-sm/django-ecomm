@@ -19,8 +19,11 @@ from . import views
 from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
+    path('login-action',views.login_action,name="login_action"),
     path('index',views.index),
-    path('products',views.products)
+    path('products',views.products),
+    path('add_cart',views.add_cart,name="add_cart"),
+    path('login',views.login)
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
